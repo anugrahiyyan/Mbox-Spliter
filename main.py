@@ -81,9 +81,10 @@ if progress_file.exists():
 # === Timer ===
 start_dt = datetime.now()
 start_time = time.time()
-log(f"\n[START] Splitting MBOX: {mbox_path}")
-log(f"[CONFIG] Output dir: {output_dir.resolve()}")
-log(f"[CONFIG] Messages per file: {messages_per_file}")
+log(f"\nStart time               : {fmt_time(start_dt)}")
+log(f"[START] Splitting MBOX     : {mbox_path}")
+log(f"[CONFIG] Output dir        : {output_dir.resolve()}")
+log(f"[CONFIG] Messages per file : {messages_per_file}")
 log(f"[CONFIG] Resume from message #{last_written} at byte {last_byte}")
 
 # === Output State ===
@@ -175,7 +176,7 @@ with Live(console=console, refresh_per_second=5) as live:
         with tempfile.NamedTemporaryFile("w", delete=False, dir=output_dir, encoding="utf-8") as tmp:
             json.dump({"last_message": msg_count, "last_byte": current_offset}, tmp)
             tmp.flush()
-            safe_replace(Path(tmp.name), Path(progress_file))
+        safe_replace(Path(tmp.name), Path(progress_file))
 
         log(f"[PROGRESS] Resume point saved at message #{msg_count}, byte {current_offset}")
 
