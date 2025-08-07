@@ -86,6 +86,7 @@ log(f"[START] Splitting MBOX     : {mbox_path}")
 log(f"[CONFIG] Output dir        : {output_dir.resolve()}")
 log(f"[CONFIG] Messages per file : {messages_per_file}")
 log(f"[CONFIG] Resume from message #{last_written} at byte {last_byte}")
+log(f"------------------------------------------------------------------------------")
 
 # === Output State ===
 msg_count = 0
@@ -137,7 +138,7 @@ with Live(console=console, refresh_per_second=5) as live:
                             out_file.close()
                             part += 1
                             out_file = open_output_file(part)
-                            log(f"[INFO] Creating part_{part}.mbox...")
+                            log(f"\n[INFO] Creating part_{part}.mbox...")
 
                         current_msg_lines = []
 
